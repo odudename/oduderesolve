@@ -1,6 +1,6 @@
 {
-  "name": "@odude/odudename",
-  "version": "1.0.4",
+  "name": "@odude/oduderesolve",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,4 +1,4 @@
-# ODudeName Tool
+# ODude Name Resolve
 A library for interacting with ODude. It can be used to retrieve wallet addresses and IPFS hashes for decentralized websites.
 
 Resolution supports different decentralized name across multiple chains.
@@ -9,12 +9,12 @@ Resolution supports different decentralized name across multiple chains.
 
 **ODudeName**
 
-## Installing ODudeName Tool
+## Installing ODude Name Resolve
 To install the library use npm.
 
 `npm i @odude/odudename`
 
-# Using ODudeName Tool
+# Using ODude Name Resolve
 
 Create a new project.
 

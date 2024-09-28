@@ -1,4 +1,4 @@
-//var w3d = require("@web3yak/web3domain");
+//var w3d = require("@odude/oduderesolve");
 const ODudeName = require("../index"); // Assuming index.js is in the root of your package directory
 require('dotenv').config(); // Remove this line if no environment variable is used
 
