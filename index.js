@@ -206,12 +206,12 @@ getContract(name)
   splitDomain(title, part) {
     //eg.navneet.crypto
     if (part === "subdomain") {
-      let subdomain = title.split(".", 2);
+      let subdomain = title.split("@", 2);
       if (subdomain[0]) {
         return subdomain[0]; //navneet
       }
     } else if (part === "primary") {
-      let subdomain = title.split(".", 3);
+      let subdomain = title.split("@", 3);
       if (subdomain[1]) {
         if (subdomain[2] !== undefined) {
           return subdomain[2];

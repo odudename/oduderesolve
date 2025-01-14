@@ -13,8 +13,8 @@ const settings = {
 const resolve = new ODudeName(settings);
 
 //Retrieve website address from Web3Domain
-resolve.getWeb("jack.dude").then(x => {
-    console.log("jack.dude website url is: " + x);
+resolve.getWeb("hello@web3").then(x => {
+    console.log("hello@web3 website url is: " + x);
 }).catch(console.error);
 
 
@@ -24,20 +24,20 @@ resolve.getWeb("vitalik.eth").then(x => {
 }).catch(console.error);
 
 //Get tokenURI for web3domain name only
-resolve.w3d_tokenURI("jack.dude").then(x => {
-    console.log("jack.dude tokenURI: " + x);
+resolve.w3d_tokenURI("hello@web3").then(x => {
+    console.log("hello@web3 tokenURI: " + x);
 }).catch(console.error);
 
 
 //Retrieve website address from Web3Domain
 //https://gateway.ipfs.io/ipfs/bafkreidcqmcrgmfj6fiplf73mxdqid7rmndqtsyfii72dssdhlie3vwqzq
-resolve.getWeb("niki.fil").then(x => {
-    console.log("niki.fil website url is: " + x);
+resolve.getWeb("hello@fil").then(x => {
+    console.log("hello@fil website url is: " + x);
 }).catch(console.error);
 
 
 //Get tokenURI for web3domain name only
 //https://web3yak.com/temp/niki.fil.json
-resolve.w3d_tokenURI("niki.fil").then(x => {
-    console.log("niki.fil tokenURI: " + x);
+resolve.w3d_tokenURI("hello@fil").then(x => {
+    console.log("hello@fil tokenURI: " + x);
 }).catch(console.error);
