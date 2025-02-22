@@ -1,71 +1,91 @@
-# ODude Name Resolve
-A library for interacting with ODude. It can be used to retrieve wallet addresses and IPFS hashes for decentralized websites.
+# ODudeResolve
 
-Resolution supports different decentralized name across multiple chains.
+`@odude/oduderesolve` is a JavaScript library that allows you to resolve ODude Names to wallet addresses, TokenURIs, and website URLs, as well as perform reverse lookups from wallet addresses to ODude Names. This package is useful for integrating ODude Name services into your Web3 applications.
 
-## Installing ODude Name Resolve
-To install the library use npm.
+## Features
 
-`npm i @odude/oduderesolve`
+- **Wallet Address to ODude Name**: Find the ODude Name associated with a given wallet address.
+- **ODude Name to Wallet Address**: Retrieve the wallet address linked to an ODude Name.
+- **ODude Name to TokenURI**: Resolve an ODude Name to its associated TokenURI.
+- **ODude Name to Website URL**: Get the decentralized website URL linked to an ODude Name.
 
-# Using ODude Name Resolve
+## Installation
 
-Create a new project.
+Install the package via npm:
 
-    mkdir odude && cd $_
-    yarn init -y
-    npm i @odude/oduderesolve
-	
-**Look up a domain for cryptocurrency address**
+```sh
+npm install @odude/oduderesolve
+```
 
-Create a new file in your project, *address.js*.
+## Configuration
 
-    var ODudeName = require("@odude/oduderesolve");
-    
-    const settings = {
-      matic_rpc_url: "https://polygon-mainnet.g.alchemy.com/v2/..........",  // Get your own RPC free URL
-      eth_rpc_url: "https://eth-mainnet.g.alchemy.com/v2/................", // Get your own RPC free URL
-      fvm_rpc_url: "https://api.node.glif.io/rpc/v1",
-      wallet_pvt_key: "private key of any empty wallet address"
-    };
-    
-    try {
-      // Instantiate Odudename
-      const resolve = new ODudeName(settings);
+To use the package, you need to provide blockchain RPC URLs and a wallet private key. Example configuration:
 
-      // Retrieves from the ODude
-      resolve.getAddress("hello@web3", "ETH").then(x => {
-        console.log("Wallet address of hello@web3 is : " + x);
-      }).catch(console.error);
+```javascript
+const settings = {
+  matic_rpc_url: "https://polygon-mainnet.g.alchemy.com/v2/your-api-key",  // Replace with your RPC URL
+  eth_rpc_url: "https://eth-mainnet.g.alchemy.com/v2/your-api-key",       // Replace with your RPC URL
+  fvm_rpc_url: "https://api.node.glif.io/rpc/v1",
+  wallet_pvt_key: "your-empty-wallet-private-key" // Replace with your private key
+};
+```
 
-      // Retrieves
-      resolve.getAddress("web3", "ETH").then(x => {
-        console.log("Wallet address of @web3 is : " + x);
-      }).catch(console.error);
+## Usage Examples
 
-      // Retrieves from the ODude
-      resolve.getAddress("hello@fil", "ETH").then(x => {
-        console.log("Wallet address of hello@fil is : " + x);
-      }).catch(console.error);
+### 1. ODude Name to Wallet Address
 
-      // Retrieves Not minted from the ODude
-      resolve.getAddress("ttttttttttttttttt@web3", "ETH").then(x => {
-        console.log("Wallet address of not exist name : " + x);
-      }).catch(console.error);
+```javascript
+const ODudeName = require("@odude/oduderesolve");
+const resolve = new ODudeName(settings);
 
-      // console.log('Tests passed successfully.');
-    } catch (error) {
-      console.error('Tests failed:', error);
-    }
+resolve.getAddress("hello@web3", "ETH").then(address => {
+  console.log("Wallet address of hello@web3 is: ", address);
+}).catch(console.error);
+```
 
-Execute the script
+### 2. Wallet Address to ODude Name
 
-    PS D:\W3D> node address.js
-    Wallet address of not exist name : null
-    Wallet address of hello@fil is : 0x83b0637ba4701aF501079A19B2073977d26cA77E
-    Wallet address of hello@web3 is : 0xaa481F8d2d966e5fCC0446fA459F5d580AE5ea9f
-    Wallet address of @web3 is : 0xaa481F8d2d966e5fCC0446fA459F5d580AE5ea9f
+```javascript
+resolve.getDomain("0xaa481F8d2d966e5fCC0446fA459F5d580AE5ea9f", "MATIC").then(x => {
+    console.log("EVM address to MATIC Name : " + x);
+}).catch(console.error);
+```
 
-**Help us improve**
+### 3. ODude Name to TokenURI
 
-We are always looking for ways to improve how developers use and integrate our products into their applications.
+```javascript
+resolve.w3d_tokenURI("hello@web3").then(x => {
+    console.log("hello@web3 tokenURI: " + x);
+}).catch(console.error);
+```
+
+### 4. ODude Name to Website URL
+
+```javascript
+resolve.getWeb("hello@web3").then(x => {
+    console.log("hello@web3 website url is: " + x);
+}).catch(console.error);
+```
+
+## Test Examples
+
+Example test scripts are available in the `test/` folder:
+- `test/address.js` – Resolves ODude Names to wallet addresses
+- `test/domain.js` – Resolves wallet addresses to ODude Names
+- `test/hash.js` – Resolves ODude Names to TokenURIs & Website URL
+
+Run the test scripts with:
+```sh
+node test/address.js
+node test/domain.js
+node test/hash.js
+```
+
+## Contributing
+
+We welcome contributions! Please feel free to submit issues or pull requests on [GitHub](https://github.com/odudename/oduderesolve).
+
+## License
+
+This project is licensed under the MIT License.
+
