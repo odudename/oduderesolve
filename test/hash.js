@@ -17,12 +17,6 @@ resolve.getWeb("hello@web3").then(x => {
     console.log("hello@web3 website url is: " + x);
 }).catch(console.error);
 
-
-//Retrieve website address from ETH
-resolve.getWeb("vitalik.eth").then(x => {
-    console.log("vitalik.eth website url is: " + x);
-}).catch(console.error);
-
 //Get tokenURI for web3domain name only
 resolve.w3d_tokenURI("hello@web3").then(x => {
     console.log("hello@web3 tokenURI: " + x);

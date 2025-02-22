@@ -3,16 +3,10 @@ A library for interacting with ODude. It can be used to retrieve wallet addresse
 
 Resolution supports different decentralized name across multiple chains.
 
-*Supports all major Web3 Domain provider.*
-
-**Ethereum Name Service (ENS)**
-
-**ODudeName**
-
 ## Installing ODude Name Resolve
 To install the library use npm.
 
-`npm i @odude/odudename`
+`npm i @odude/oduderesolve`
 
 # Using ODude Name Resolve
 
@@ -20,18 +14,19 @@ Create a new project.
 
     `mkdir odude && cd $_
     yarn init -y
-    npm i @odude/odudename`
+    npm i @odude/oduderesolve`
 	
 **Look up a domain for cryptocurrency address**
 
 Create a new file in your project, *address.js*.
 
-    var ODudeName = require("@odude/odudename");
+    var ODudeName = require("@odude/oduderesolve");
     
     const settings = {
       matic_rpc_url: "https://polygon-mainnet.g.alchemy.com/v2/..........",  //Get your own RPC free URL
       eth_rpc_url: "https://eth-mainnet.g.alchemy.com/v2/................", //Get your own RPC free URL
-      fvm_rpc_url: "https://api.node.glif.io/rpc/v1"
+      fvm_rpc_url: "https://api.node.glif.io/rpc/v1",
+      wallet_pvt_key: "private key of any empty wallet address"
     };
     
 try {
@@ -40,34 +35,26 @@ try {
 
   
   //Retrieves from the ODude
-resolve.getAddress("jack.dude", "ETH").then(x => {
-  console.log("Wallet address of jack.dude is : " + x);
+resolve.getAddress("hello@web3", "ETH").then(x => {
+  console.log("Wallet address of hello@web3 is : " + x);
 }).catch(console.error);
 
   //Retrieves
-  resolve.getAddress("dude", "ETH").then(x => {
-    console.log("Wallet address of dude is : " + x);
+  resolve.getAddress("web3", "ETH").then(x => {
+    console.log("Wallet address of @web3 is : " + x);
   }).catch(console.error);
   
   
 
 //Retrieves from the ODude
-resolve.getAddress("niki.fil", "ETH").then(x => {
-  console.log("Wallet address of niki.fil is : " + x);
+resolve.getAddress("hello@fil", "ETH").then(x => {
+  console.log("Wallet address of hello@fil is : " + x);
 }).catch(console.error);
-
-
-
-//Retrieves from the ENS domain
-resolve.getAddress("brad.eth", "ETH").then(x => {
-  console.log("Wallet address of brad.eth is : " + x);
-}).catch(console.error);
-
 
 
 //Retrieves Not minted from the ODude
-resolve.getAddress("jaiiiiiiiiiiiick.demo", "ETH").then(x => {
-  console.log("Wallet address of jaiiiiiiiiiiiiiiick.demo is : " + x);
+resolve.getAddress("ttttttttttttttttt@web3", "ETH").then(x => {
+  console.log("Wallet address of not exist name : " + x);
 }).catch(console.error);
 
 
@@ -75,7 +62,6 @@ resolve.getAddress("jaiiiiiiiiiiiick.demo", "ETH").then(x => {
 } catch (error) {
   console.error('Tests failed:', error);
 }
-	
 
 Execute the script
 

@@ -16,34 +16,26 @@ try {
 
   
   //Retrieves from the ODude
-resolve.getAddress("jack.dude", "ETH").then(x => {
-  console.log("Wallet address of jack.dude is : " + x);
+resolve.getAddress("hello@web3", "ETH").then(x => {
+  console.log("Wallet address of hello@web3 is : " + x);
 }).catch(console.error);
 
   //Retrieves
-  resolve.getAddress("dude", "ETH").then(x => {
-    console.log("Wallet address of dude is : " + x);
+  resolve.getAddress("web3", "ETH").then(x => {
+    console.log("Wallet address of @web3 is : " + x);
   }).catch(console.error);
   
   
 
 //Retrieves from the ODude
-resolve.getAddress("niki.fil", "ETH").then(x => {
-  console.log("Wallet address of niki.fil is : " + x);
+resolve.getAddress("hello@fil", "ETH").then(x => {
+  console.log("Wallet address of hello@fil is : " + x);
 }).catch(console.error);
-
-
-
-//Retrieves from the ENS domain
-resolve.getAddress("brad.eth", "ETH").then(x => {
-  console.log("Wallet address of brad.eth is : " + x);
-}).catch(console.error);
-
 
 
 //Retrieves Not minted from the ODude
-resolve.getAddress("jaiiiiiiiiiiiick.demo", "ETH").then(x => {
-  console.log("Wallet address of jaiiiiiiiiiiiiiiick.demo is : " + x);
+resolve.getAddress("ttttttttttttttttt@web3", "ETH").then(x => {
+  console.log("Wallet address of not exist name : " + x);
 }).catch(console.error);
 
 

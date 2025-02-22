@@ -13,19 +13,14 @@ const settings = {
 
 const resolve = new ODudeName(settings);
 
-//Retrieves from the Web3Domain
-resolve.getDomain("0x8D714B10B719c65B878F2Ed1436A964E11fA3271", "MATIC").then(x => {
+
+//Retrieves domain from wallet address from Polygon
+resolve.getDomain("0xaa481F8d2d966e5fCC0446fA459F5d580AE5ea9f", "MATIC").then(x => {
     console.log("EVM address to MATIC Name : " + x);
 }).catch(console.error);
 
 
-//Retrieves from the ENS domain
-resolve.getDomain("0x0C82A14EDCF37266889e531e58cA516c10C78f18", "ENS").then(x => {
-    console.log("EVM Address to ENS Domain : " + x);
-}).catch(console.error);
-
-//Retrieves from the Web3Domain
-
-resolve.getDomain("0x6f937139EfDD7e773192E798e5aa2dFE5D4E192a", "FVM").then(x => {
+//Retrieves domain from wallet address from Filecoin
+resolve.getDomain("0x83b0637ba4701aF501079A19B2073977d26cA77E", "FVM").then(x => {
     console.log("EVM address to FVM Name : " + x);
 }).catch(console.error);

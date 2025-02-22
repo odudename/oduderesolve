@@ -46,56 +46,36 @@ getContract(name)
      
 }
 
-  
+  // Get the address of the owner of a domain
   getAddress(name, curr) {
-    var domain_provider = this.w3d_find_provider(name);
-    if (domain_provider == "eth") {
-      return this.w3d_eth_addr(name);
-    }
-    else {
-      return this.getOwner(name);
-    }
+    return this.getOwner(name);
   }
 
-
+// Get the domain of an address
   getDomain(addr, provider) {
-
-    if (provider == "ENS") {
-      return this.w3d_addr_eth(addr);
-    } else {
-      return this.w3d_web3_getReverse(addr,provider);
-    }
+    return this.w3d_web3_getReverse(addr,provider);
   }
 
-
+// Get the website of a domain
   getWeb(name) {
-    var domain_provider = this.w3d_find_provider(name);
-    if (domain_provider == "eth") {
-      // return this.w3d_blank();
-      return this.w3d_eth_website(name);
-    }else {
-      return this.w3d_web3_website(name);
-    }
+    return this.w3d_web3_website(name);
   }
 
-  w3d_blank = async () => {
-    return "null";
-  }
-
+  //Get on-chain wallet address of a domain based on provider
   w3d_web3_getReverse = async (addr,provider) => {
     let contract;
     try {
       if(provider.toLowerCase() == 'fvm')
       {
         contract = this.getContract('fvm');
-        var oldvalue = await contract.methods.getReverse(addr).call();
+        var value = await contract.methods.getReverse(addr).call();
       }
       else
       {
         contract = this.getContract('matic');
-      var oldvalue = await contract.methods.getReverse(addr).call();
+      var value = await contract.methods.getReverse(addr).call();
       }
-      return oldvalue;
+      return value;
     } catch (error) {
       return null;
     }
@@ -103,9 +83,9 @@ getContract(name)
 
 
 
-
+//Get website address of a domain
   w3d_web3_website = async (name) => {
-    var domain_provider = this.w3d_find_provider(name);
+
     try {
       let contract = this.getContract(name);
   
@@ -145,10 +125,9 @@ getContract(name)
 
   }
 
-
+//Get tokenURI of a domain
   w3d_tokenURI = async (name) => {
 
-    var domain_provider = this.w3d_find_provider(name);
     try {
       let contract = this.getContract(name);
 
@@ -170,45 +149,14 @@ getContract(name)
   }
 
   
-  w3d_eth_addr = async (name) => {
-    console.log(this.eth_rpc_url);
-    const {JsonRpcProvider} = require("ethers");
-    try {
-    const provider = new JsonRpcProvider(this.eth_rpc_url);
-   const address = await provider.resolveName(name);
-   return address;
-  } catch (error) {
-    console.error("Error initializing provider:", error);
 
-  }
-    
-  };
-
-
-
-  w3d_addr_eth = async (addr) => {
-    const {JsonRpcProvider} = require("ethers");
-    const provider = new JsonRpcProvider(this.eth_rpc_url);
-    const name = await provider.lookupAddress(addr);
-    return name;
-  };
-
-
-  w3d_eth_website = async (name) => {
-    const {JsonRpcProvider} = require("ethers");
-    const provider = new JsonRpcProvider(this.eth_rpc_url);
-
-    const resolver = await provider.getResolver(name);
-    const contentHash = await resolver.getContentHash();
-    return contentHash;
-  };
-
+//Split domain name into subdomain and primary domain
   splitDomain(title, part) {
-    //eg.navneet.crypto
+    //eg.hello@web3
     if (part === "subdomain") {
       let subdomain = title.split("@", 2);
       if (subdomain[0]) {
-        return subdomain[0]; //navneet
+        return subdomain[0]; //hello
       }
     } else if (part === "primary") {
       let subdomain = title.split("@", 3);
@@ -226,6 +174,7 @@ getContract(name)
     }
   }
 
+  //Check if a string is a valid URL
   w3d_isValidUrl(string) {
     try {
       new URL(string);
@@ -235,7 +184,7 @@ getContract(name)
     }
   }
 
-
+//Fetch data from a JSON file
   async w3d_fetch_from_json(url) {
     var axios = require('axios');
     try {
@@ -262,6 +211,7 @@ getContract(name)
 
   }
 
+  //Find the provider of a domain
   w3d_find_provider(name) {
 
     var fvm = ["fil", "fvm", "ipfs", "filecoin"];
@@ -275,18 +225,21 @@ getContract(name)
     }
   }
 
+
+  //Get the owner of a domain
   getOwner = async (name) => {
 
     try {
       let contract = this.getContract(name);
       var get_id_from_name = await contract.methods.getID(name).call();
-      var oldvalue = await contract.methods.getOwner(get_id_from_name).call();
-      return oldvalue;
+      var value = await contract.methods.getOwner(get_id_from_name).call();
+      return value;
     } catch (error) {
       return null;
     }
   };
 
+  //Get the total number of domains owned by an address
   geTotalDomain = async (addr,provider) => {
     try {
       let contract = this.getContract(provider);
@@ -299,6 +252,7 @@ getContract(name)
   }
 };
 
+//Get the list of domains owned by an address
 getDomainList = async (addr,provider) => {
   try {
     let contract = this.getContract(provider);
@@ -322,7 +276,7 @@ getDomainList = async (addr,provider) => {
 }
 };
 
-
+//Get the domain name of an ID
 getDomainNameById = async (id,provider) => {
   try {
     let contract = this.getContract(provider);
